@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Block A - 180 Degree View</title>
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  <style>
+    a-image.clickable:hover {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <a-scene>
+    <!-- Background -->
+    <a-sky src="assets/Block A.jpg" rotation="0 -90 0"></a-sky>
+
+    <!-- Camera wrapper for 180-degree view -->
+    <a-entity id="cameraWrapper" rotation="0 0 0">
+      <a-camera 
+        fov="80" 
+        wasd-controls-enabled="false" 
+        look-controls="pointerLockEnabled: true; touchEnabled: true;">
+        <a-cursor fuse="false" raycaster="objects: .clickable"></a-cursor>
+      </a-camera>
+    </a-entity>
+
+    <!-- Left Arrow to Block E -->
+    <a-image class="clickable"
+             src="assets/arrow-left.png"
+             position="-2 1 -2"
+             rotation="0 45 0"
+             scale="0.7 0.7 0.7"
+             onclick="location.href='blockE.html'"></a-image>
+    <a-text value="Block E"
+            position="-2 1.6 -2"
+            color="#000000"
+            align="center"
+            width="3"></a-text>
+
+    <!-- Right Arrow to Canteen -->
+    <a-image class="clickable"
+             src="assets/arrow-right.png"
+             position="2 1 -2"
+             rotation="0 -45 0"
+             scale="0.7 0.7 0.7"
+             onclick="location.href='BlockE.html'"></a-image>
+    <a-text value="Canteen"
+            position="2 1.6 -2"
+            color="#000000"
+            align="center"
+            width="3"></a-text>
+  </a-scene>
+
+  <script>
+    // Simulate 180-degree view
+    const cameraWrapper = document.querySelector('#cameraWrapper');
+    let yaw = 0;
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') yaw -= 5;
+      if (e.key === 'ArrowRight') yaw += 5;
+      yaw = Math.max(-90, Math.min(90, yaw));
+      cameraWrapper.setAttribute('rotation', `0 ${yaw} 0`);
+    });
+  </script>
+</body>
+</html>
