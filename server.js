@@ -9,7 +9,7 @@ dotenv.config();
 const app = express();
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect('mongodb+srv://m48786665:Nothing_123@moksha.btdd0uy.mongodb.net/?retryWrites=true&w=majority&appName=moksha', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -21,7 +21,6 @@ const User = mongoose.model('User', new mongoose.Schema({
   email: String,
   password: String
 }));
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));  // Serve static files (e.g., background.jpg)
 
